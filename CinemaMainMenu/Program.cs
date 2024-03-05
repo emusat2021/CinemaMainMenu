@@ -8,6 +8,8 @@ namespace CinemaMainMenu
         {
 
             List<PurchaseSummary> listPurchaseSummary = new List<PurchaseSummary>();
+            List<string> wishList = new List<string>();
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("**********************************");
@@ -29,6 +31,10 @@ namespace CinemaMainMenu
                 Console.WriteLine("0\t- EXIT the program");
                 Console.WriteLine("1\t- See the price for a ticket");
                 Console.WriteLine("2\t- Calculate total price for all chosen tickets\n");
+                Console.WriteLine("3\t- Add a list of wishes \n");
+                Console.WriteLine("4\t- Info about \n");
+
+
 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Your selection: \n");
@@ -40,6 +46,7 @@ namespace CinemaMainMenu
                     case "0":
                         Environment.Exit(0);
                         break;
+                    // See the price for a ticket
                     case "1":
                         bool continueSelect = true;
                         while (continueSelect)
@@ -91,7 +98,7 @@ namespace CinemaMainMenu
                                 Console.ResetColor();
 
                             }
-
+                            // Add price and quantity to the list
                             listPurchaseSummary.Add(purchaseSummary);
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine($"Number of tickets: {purchaseSummary.Quantity}\tTotal Price: {purchaseSummary.TotalPrice} ");
@@ -101,14 +108,44 @@ namespace CinemaMainMenu
 
                         }
                         continue;
-                        case "2":
-
+                    case "2":
+                        // Show total price and total nr of tickets
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.WriteLine($"Number of tickets: {listPurchaseSummary.Sum(item => item.Quantity)}\nTotal Price: {listPurchaseSummary.Sum(item => item.TotalPrice)} ");
+                        Console.WriteLine($"Number of tickets: {listPurchaseSummary.Sum(item => item.Quantity)}\nTotal Price: {listPurchaseSummary.Sum(item => item.TotalPrice)} ");
+                        Console.ResetColor();
+                        continue;
+                    case "3":
+                        bool continueWishList = true;
+                        while (continueWishList)
+                        {
+
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Enter your words that are your wishes, Maxim 10 words: \n");
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("\nPress q to go to the Main Menu \n");
                             Console.ResetColor();
 
-                        continue;
-                        default:
+                            string wish = Console.ReadLine().ToLower();
+
+                            if (wish == "q")
+                            {
+                                continueWishList = false;
+                            }
+                            wishList.Add(wish);
+                        }
+                        foreach(string s in wishList)
+                        {
+                            for (int i = 1; i <= 10; i++)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write(i + "." + s + ",");
+                                Console.ResetColor();
+                            }
+                        }
+                        break;
+                    case "4":
+                        break;
+                    default:
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid selection. Please try again.");
                         Console.ResetColor();
