@@ -31,7 +31,7 @@ namespace CinemaMainMenu
                 Console.WriteLine("1\t- See the price for a ticket");
                 Console.WriteLine("2\t- Calculate total price for all chosen tickets\n");
                 Console.WriteLine("3\t- Add a list of wishes \n");
-                Console.WriteLine("4\t- Info about \n");
+                Console.WriteLine("4\t- Add a comment to our team \n");
 
 
 
@@ -122,6 +122,8 @@ namespace CinemaMainMenu
 
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("Enter your words that are your wishes, Maxim 10 words: \n");
+                            Console.WriteLine("After every word press Enter and then write the next one, Maxim 10 words: \n");
+
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("\nPress 0 to go to the Main Menu \n");
                             Console.ResetColor();
@@ -141,9 +143,36 @@ namespace CinemaMainMenu
                             Console.Write($"{s+1}.{wishList[s]},");
                             Console.ResetColor();
                         }
-
                         continue;
                     case "4":
+                        bool commentToTeam = true;
+                        List<string> commentList = new List<string>();
+
+                        while (commentToTeam)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Enter your comment to the team with minim 3 words and then Enter. Use space after every word.\n");
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("\nPress 0 to go to the Main Menu \n");
+                            Console.ResetColor();
+
+                            string commentText = Console.ReadLine();
+
+                            string[] separateWords = commentText.Split(' ');
+                            foreach(string word in separateWords)
+                            {
+                                commentList.Add(word);
+                            }
+
+                            if (commentText == "0")
+                            {
+                                commentToTeam = false;
+                            }
+                        }
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        string theThirdWord = commentList[2];
+                        Console.WriteLine($"Your third word is: \"{theThirdWord}\"");
+                        Console.ResetColor();
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
