@@ -7,7 +7,7 @@ namespace CinemaMainMenu
         static void Main(string[] args)
         {
 
-            List<string> list = new List<string>();
+            List<PurchaseSummary> listPurchaseSummary = new List<PurchaseSummary>();
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("**********************************");
@@ -44,14 +44,14 @@ namespace CinemaMainMenu
                         bool continueSelect = true;
                         while (continueSelect)
                         {
+                            var purchaseSummary = new PurchaseSummary();
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\nPlease enter your age: \n");
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.WriteLine("\nPress q to go to the Main Menu or Enter to continue\n");
+                            Console.WriteLine("\nPress q to go to the Main Menu \n");
                             Console.ResetColor();
 
                             string userAge = Console.ReadLine().ToLower();
-
                             if (userAge == "q")
                             {
                                 continueSelect = false;
@@ -60,37 +60,59 @@ namespace CinemaMainMenu
                             {
                                 Console.ForegroundColor = ConsoleColor.Cyan;
                                 Console.WriteLine("\tPrice ticket: Pensioner SEK 90 \n\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine("Enter quantity: \n");
+                                purchaseSummary.Quantity = int.Parse(Console.ReadLine());
+                                purchaseSummary.PricePerTicket = 90;
                                 Console.ResetColor();
-                                Console.ReadLine();
+
                             }
                             else if (int.Parse(userAge) > 0 && int.Parse(userAge) < 20)
                             {
 
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("Price ticket: Student SEK 80");
+                                Console.WriteLine("\tPrice ticket: Student SEK 80\n\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine("Enter quantity: \n");
+                                purchaseSummary.Quantity = int.Parse(Console.ReadLine());
+                                purchaseSummary.PricePerTicket = 80;
                                 Console.ResetColor();
-                                Console.ReadLine();
+
 
                             }
                             else if ((int.Parse(userAge) < 64 && int.Parse(userAge) > 20))
                             {
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("Price ticket: Ordinary SEK 120");
+                                Console.WriteLine("\tPrice ticket: Ordinary SEK 120\n\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine("Enter quantity:\n");
+                                purchaseSummary.Quantity = int.Parse(Console.ReadLine());
+                                purchaseSummary.PricePerTicket = 120;
                                 Console.ResetColor();
-                                Console.ReadLine();
 
                             }
+
+                            listPurchaseSummary.Add(purchaseSummary);
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine($"Number of tickets: {purchaseSummary.Quantity}\tTotal Price: {purchaseSummary.TotalPrice} ");
+                            Console.ResetColor();
+
+
+
                         }
-                            continue;
+                        continue;
                         case "2":
-                            
-                            break;
+
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine($"Number of tickets: {listPurchaseSummary.Sum(item => item.Quantity)}\nTotal Price: {listPurchaseSummary.Sum(item => item.TotalPrice)} ");
+                            Console.ResetColor();
+
+                        continue;
                         default:
-                            Console.WriteLine("Invalid selection. Please try again.");
-                            break;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid selection. Please try again.");
+                        Console.ResetColor();
+                        break;
                 }
             }
             while(continueProgram);
