@@ -8,7 +8,6 @@ namespace CinemaMainMenu
         {
 
             List<PurchaseSummary> listPurchaseSummary = new List<PurchaseSummary>();
-            List<string> wishList = new List<string>();
 
 
             Console.ForegroundColor = ConsoleColor.Green;
@@ -116,33 +115,34 @@ namespace CinemaMainMenu
                         continue;
                     case "3":
                         bool continueWishList = true;
+                        List<string> wishList = new List<string>();
+
                         while (continueWishList)
                         {
 
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("Enter your words that are your wishes, Maxim 10 words: \n");
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.WriteLine("\nPress q to go to the Main Menu \n");
+                            Console.WriteLine("\nPress 0 to go to the Main Menu \n");
                             Console.ResetColor();
 
                             string wish = Console.ReadLine().ToLower();
 
-                            if (wish == "q")
+                            wishList.Add(wish);
+
+                            if (wish == "0")
                             {
                                 continueWishList = false;
                             }
-                            wishList.Add(wish);
                         }
-                        foreach(string s in wishList)
+                        for(int s = 0; s < wishList.Count && s<=11; s++)
                         {
-                            for (int i = 1; i <= 10; i++)
-                            {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Write(i + "." + s + ",");
-                                Console.ResetColor();
-                            }
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write($"{s+1}.{wishList[s]},");
+                            Console.ResetColor();
                         }
-                        break;
+
+                        continue;
                     case "4":
                         break;
                     default:
