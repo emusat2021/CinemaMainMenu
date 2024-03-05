@@ -8,7 +8,6 @@ namespace CinemaMainMenu
 {
     public class PurchaseSummary
     {
-        public int NumberOfPersons { get; set; }
         public int Quantity { get; set; }
         public int PricePerTicket { get; set; }
 
